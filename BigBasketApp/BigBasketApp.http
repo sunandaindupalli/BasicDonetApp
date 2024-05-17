@@ -1,0 +1,6 @@
+@BigBasketApp_HostAddress = http://localhost:5048
+
+GET {{BigBasketApp_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
