@@ -10,6 +10,8 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
 builder.Services.AddDbContext<UserContext>(options =>options.UseNpgsql("Server=localhost;port=5432;Database=BigBasketDB;user id=postgres;password=postgres"));
 builder.Services.AddDbContext<ItemsContext>(options=>options.UseNpgsql("Server=localhost;port=5432;Database=BigBasketDB;user id=postgres;password=postgres"));
+builder.Services.AddDbContext<CustomerContext>(options=>options.UseNpgsql("Server=localhost;port=5432;Database=BigBasketDB;user id=postgres;password=postgres"));
+builder.Services.AddDbContext<OrderContext>(options=>options.UseNpgsql("Server=localhost;port=5432;Database=BigBasketDB;user id=postgres;password=postgres"));
 builder.Services.AddAuthorization();
 
 //add db contexts

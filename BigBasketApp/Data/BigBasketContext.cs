@@ -43,4 +43,30 @@ namespace BigBasketApp.Data{
         }
         public DbSet<BasketItems> Items { get; set; }
     }
+    public class CustomerContext : DbContext {
+        public CustomerContext(DbContextOptions<CustomerContext> options) : base (options) { }
+
+        protected override void OnModelCreating(ModelBuilder customerBuilder) {
+            customerBuilder.Entity<Customers>().HasData(
+                new Customers { Id=100, Name ="Sunanda", Email="sunanda@gmail.com", Phone="1234567890", Address="Hyderabad"},
+                new Customers { Id=101, Name ="Siva", Email="siva@gmail.com", Phone="1234567899", Address="Vijayawada"}
+            );
+            base.OnModelCreating(customerBuilder);
+         }
+        public DbSet<Customers> Customers { get; set;}
+    }
+
+    public class OrderContext : DbContext{
+        public OrderContext(DbContextOptions<OrderContext> options) : base (options) { }
+
+        protected override void OnModelCreating(ModelBuilder orderBuilder) {
+            orderBuilder.Entity<Orders>().HasData(
+                new Orders { OrderId = 101, CustomerId= 100, ItemId = 1001, OrderDate="18-05-2023", OrderStatus =" InProgress", TotalAmount =250.00 },
+                new Orders { OrderId = 102, CustomerId= 101, ItemId = 1011, OrderDate="19-05-2023", OrderStatus =" Ordered", TotalAmount =150.00 },
+                new Orders { OrderId = 103, CustomerId= 100, ItemId = 1003, OrderDate="17-05-2023", OrderStatus =" Delivered", TotalAmount =300.00 }
+            );
+            base.OnModelCreating(orderBuilder);
+        }
+       public DbSet<Orders> Orders { get; set;}
+    }
 }

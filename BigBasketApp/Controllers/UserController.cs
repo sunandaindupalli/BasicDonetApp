@@ -32,13 +32,28 @@ namespace BigBasketApp{
             db.SaveChanges();
             return Ok();
         }
+        [HttpPut][Route("/[controller]/updateUser")]
+        public IActionResult Update(int id, [FromBody] Users user){
+            Users? userData = db.Users.FirstOrDefault( x => x.UserId == id);
+            if(userData!=null){
+                userData.Name = user.Name;
+                userData.Password = user.Password;
+                db.SaveChanges();
+                return Ok("User details Updated Successfully");
+            }else{
+                return BadRequest("User data Not Updated");
+            }
+        }
         [HttpDelete][Route("/[controller]/deleteUser")]
         public IActionResult Delete(int id){
            Users? user = db.Users.Find(id);
-           if(user!=null)
+           if(user!=null){
             db.Users.Remove(user);
             db.SaveChanges();
-            return Ok("Success");
+            return Ok("User with id "+user.UserId+" has been deleted");}
+           else{
+            return BadRequest(" user id not found");
+            }
         }
     }
 }

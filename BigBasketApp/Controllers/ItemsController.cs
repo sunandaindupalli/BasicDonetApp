@@ -35,6 +35,32 @@ namespace BigBasketApp{
                 db.SaveChanges();
                 return Ok(item);
         }
+        [HttpPut][Route("/[controller]/updateItem")]
+        public IActionResult Update(int id, [FromBody] BasketItems item){
+            BasketItems? data = db.Items.FirstOrDefault( x => x.ItemId == id);
+            if(data!=null){
+                data.Name = item.Name;
+                data.Description = item.Description;
+                data.Quantity = item.Quantity;
+                data.Price = item.Price;
+                data.Category = item.Category;
+                db.SaveChanges();
+                return Ok("Item data Updated Successfully");
+            }else{
+                return BadRequest("Item data Not Updated");
+            }
+        }
+        [HttpDelete][Route("/[controller]/deleteItem")]
+        public IActionResult Delete(int id){
+           BasketItems? item = db.Items.Find(id);
+           if(item!=null){
+            db.Items.Remove(item);
+            db.SaveChanges();
+            return Ok("Item with id "+ item.ItemId +" has been deleted");}
+           else{
+            return BadRequest(" Item id not found");
+            }
+        }
 
     }
 }
