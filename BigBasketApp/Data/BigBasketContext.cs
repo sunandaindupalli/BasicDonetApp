@@ -48,8 +48,9 @@ namespace BigBasketApp.Data{
 
         protected override void OnModelCreating(ModelBuilder customerBuilder) {
             customerBuilder.Entity<Customers>().HasData(
-                new Customers { Id=100, Name ="Sunanda", Email="sunanda@gmail.com", Phone="1234567890", Address="Hyderabad"},
-                new Customers { Id=101, Name ="Siva", Email="siva@gmail.com", Phone="1234567899", Address="Vijayawada"}
+                new Customers { Id=100, Name ="Sunanda", Email="sunanda@gmail.com", Password="111", Phone="1234567890", Address="Hyderabad"},
+                new Customers { Id=101, Name ="Siva", Email="siva@gmail.com", Password = "222",Phone="1234567899", Address="Vijayawada"},
+                new Customers { Id=102, Name ="Krishna", Email="krishna@gmail.com", Password = "333",Phone="1234567700", Address="Chennai"}
             );
             base.OnModelCreating(customerBuilder);
          }
